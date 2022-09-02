@@ -1,12 +1,36 @@
-<h2><%= book.title %> </h2>
+<div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3">
+    <div    
+        class="col-span-1 flex rounded-lg items-center justify-center p-8 bg-white shadow-sm shadow-slate-100" 
+        style="min-height: 321px">
+        <img 
+            src="<%= book.coverImagePath %>" 
+            class="object-cover shadow-xl hover:-translate-y-1 duration-300" 
+            height="250" width="200">
+    </div>
 
-<img src="<%= book.coverImagePath %> " alt="" height="150" width="100">
+    <div class="col-span-2 px-12 py-8">
+        <h1 class="text-3xl mb-2 font-medium text-slate-600"><%= book.title %></h1>
+        <a class="block mb-6 text-sky-400 font-medium hover:text-sky-500" href="/authors/<%= book.author.id %>"><%= book.author.name %></a>
 
-<div>Author: <%= book.author.name %></div>
-<div>Publish Date: <%= book.publishDate.toDateString() %></div>
-<div>Page Count: <%= book.pageCount %></div>
-<div>Description: <%= book.description %></div>
+        <div class="text-slate-400 text-sm">Publish Date: <%= book.publishDate.toDateString() %></div>
+        <div class="text-slate-400 text-sm">Page Count: <%= book.pageCount %></div>
+        <div class="my-4 text-slate-500">Description: <%= book.description %></div>
 
-<a href="/books/<%= book.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm', { url: `/books/${book.id}` }) %>
-<a href="/authors/<%= book.author.id %>">View Author</a>
+        <div class="flex mt-8">
+            <a 
+                href="/books/<%= book.id %>/edit"
+                class="p-1 text-sm bg-green-400 rounded-md text-white px-3 
+                    hover:bg-green-500 hover:text-white">Edit</a>
+            <%- include('../partials/deleteForm', { url: `/books/${book.id}` }) %>
+            <a 
+                href="/authors/<%= book.author.id %>"
+                class="p-1 text-sm bg-sky-400 rounded-md text-white px-3 ml-4 
+                hover:bg-sky-500 hover:text-white">View Author</a>
+        </div>
+        
+    </div>
+
+</div>
+
+
+

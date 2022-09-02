@@ -124,19 +124,20 @@ router.delete('/:id', async (req, res) => {
 })
 
 async function renderNewPage(res, book, hasError = false) {
-    renderFormPage(res, book, 'new', hasError)
+    renderFormPage(res, book, 'new', 'Create', hasError)
 }
 
 async function renderEditPage(res, book, hasError = false) {
-        renderFormPage(res, book, 'edit', hasError)
+        renderFormPage(res, book, 'edit', 'Update', hasError)
 }
 
-async function renderFormPage(res, book, form, hasError = false) {
+async function renderFormPage(res, book, form, label, hasError = false) {
     try {
         const authors = await Authors.find({})
         const params = {
             authors: authors,
-            book: book
+            book: book,
+            label: label
         }
 
         if(hasError) {

@@ -1,7 +1,10 @@
-<h2>Edit Author</h2>
-<form action="/authors/<%= author.id %>?_method=PUT" method="POST">
-    <%- include('_form_fields.ejs') %> <br>
-    
-    <a href="/authors/<%= author.id %>">Cancel</a>
-    <button type="submit">Update</button>
+<h1 class="text-2xl mb-4 font-medium text-slate-600 text-center">Edit Author</h1>
+
+<form 
+    action="/authors/<%= author.id %>?_method=PUT" 
+    method="POST" 
+    class="bg-white shadow-sm max-w-md mx-auto p-5 rounded-md">
+    <%- include('_form_fields.ejs') %>
+    <%- include('../partials/btnCancel.ejs', {url: `/authors/${author.id}` }) %>
+    <%- include('../partials/btnSubmit.ejs', {label: 'Update' }) %>
 </form>

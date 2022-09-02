@@ -1,39 +1,92 @@
-<div>
-    <label>Title</label>
-    <input type="text" name="title" value="<%= book.title %>"> 
+
+<div class="grid grid-cols-1 md:grid-cols-3">
+    <div class="col-span-2 md:pr-5">
+        <div class="flex flex-col mb-4" >
+            <label 
+                class="text-sm text-slate-500 font-normal mb-1"
+                for="title">Enter the book title</label>
+            <input 
+                type="text" 
+                id="title" 
+                name="title" 
+                class="py-2 pl-3 w-full pr-1 border border-slate-200 rounded-lg shadow-xs shadow-slate-50
+                    text-slate-500 outline-none focus:border-slate-50 focus:shadow-md focus:shadow-slate-100"
+                value="<%= book.title %>"> 
+        </div>
+        
+        <div class="flex flex-col mb-4">
+            <label 
+                class="text-sm text-slate-500 font-normal mb-1"
+                for="author">Who is the author?</label>
+            <select 
+                id="author" 
+                name="author" 
+                class="py-2 pl-3 w-full pr-1 border border-slate-200 rounded-lg shadow-xs shadow-slate-50
+                text-slate-500 outline-none focus:border-slate-50 focus:shadow-md focus:shadow-slate-100">
+                <% authors.forEach(author => { %> 
+                    <% if( author.id === book.author ) { %>  
+                        <option selected value="<%= author.id %>" label="<%= author.name %>">
+                    <% } else { %> 
+                        <option value="<%= author.id %>" label="<%= author.name %>">
+                    <% }; %> 
+                <% }); %> 
+            </select>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="col-span-2 flex flex-col mb-4">
+                <label 
+                    class="text-sm text-slate-500 font-normal mb-1"
+                    for="publishDate">Publish Date</label>
+                <input 
+                    id="publishDate"
+                    type="date" 
+                    name="publishDate" 
+                    class="py-2 pl-3 w-full pr-1 border border-slate-200 rounded-lg shadow-xs shadow-slate-50
+                    text-slate-500 outline-none focus:border-slate-50 focus:shadow-md focus:shadow-slate-100"
+                    value="<%= book.publishDate == null ? '' : 
+                    book.publishDate.toISOString().split('T')[0] %>"> 
+            </div>
+        
+            <div class="col-span-1 flex flex-col mb-4">
+                <label 
+                    class="text-sm text-slate-500 font-normal mb-1"    
+                    for="pageCount">Page Count</label>
+                <input 
+                    id="pageCount"
+                    type="number" 
+                    min="1" 
+                    name="pageCount" 
+                    class="py-2 pl-3 w-full pr-1 border border-slate-200 rounded-lg shadow-xs shadow-slate-50
+                    text-slate-500 outline-none focus:border-slate-50 focus:shadow-md focus:shadow-slate-100"
+                    value="<%= book.pageCount %>"> 
+            </div>
+        </div>
+        
+        <div class="flex flex-col mb-4">
+            <label
+                class="text-sm text-slate-500 font-normal mb-1"
+                for="description">Description</label>
+            <textarea 
+                rows="8"
+                id="description"
+                name="description"
+                class="py-2 pl-3 w-full pr-1 border border-slate-200 rounded-lg shadow-xs 
+                shadow-slate-50 text-slate-500 outline-none focus:border-slate-50 
+                focus:shadow-md focus:shadow-slate-100"><%= book.description %></textarea>
+        </div>        
+    </div>
+
+    <div class="text-center">
+        <label
+            class="block text-sm text-slate-500 font-normal mb-1"
+            for="cover">Book Cover</label>
+        <input type="file" id="cover"  name="cover" class="filepond"> 
+
+        <div class="mt-8">
+            <%- include('../partials/btnCancel.ejs', { url: '/books' }) %>
+            <%- include('../partials/btnSubmit.ejs', { label: label }) %>
+        </div>
+    </div>
 </div>
 
-<div>
-    <label>Author</label>
-    <select name="author">
-        <% authors.forEach(author => { %> 
-            <% if( author.id === book.author ) { %>  
-                <option selected value="<%= author.id %>" label="<%= author.name %>">
-            <% } else { %> 
-                <option value="<%= author.id %>" label="<%= author.name %>">
-            <% }; %> 
-        <% }); %> 
-    </select>
-</div>
-
-<div>
-    <label>Publish Date</label>
-    <input type="date" name="publishDate" 
-        value="<%= book.publishDate == null ? '' : 
-        book.publishDate.toISOString().split('T')[0] %>"> 
-</div>
-
-<div>
-    <label>Page Count</label>
-    <input type="number" min="1" name="pageCount" value="<%= book.pageCount %>"> 
-</div>
-
-<div>
-    <label>Cover</label>
-    <input type="file"  name="cover" class="filepond"> 
-</div>
-
-<div>
-    <label>Description</label>
-    <textarea name="description"><%= book.description %></textarea>
-</div>

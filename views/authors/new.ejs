@@ -1,7 +1,7 @@
-<h2>New Author</h2>
-<form action="/authors" method="POST">
-    <%- include('_form_fields.ejs') %> <br>
-    
-    <a href="/authors">Cancel</a>
-    <button type="submit">Create</button>
+<h1 class="text-2xl mb-4 font-medium text-slate-600 text-center">Add New Author</h1>
+
+<form action="/authors" method="POST" class="bg-white shadow-sm max-w-md mx-auto p-5 rounded-md">
+    <%- include('_form_fields.ejs') %>     
+    <%- include('../partials/btnCancel.ejs', {url: '/authors' }) %>
+    <%- include('../partials/btnSubmit.ejs', {label: 'Create' }) %>
 </form>

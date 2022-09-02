@@ -7,18 +7,57 @@
     <title>Mybrary</title>
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/output.css">
 
     <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
     <script defer src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-    <script defer src="/javascripts/fileUpload.js"></script>
+    <script defer src="/fileUpload.js"></script>
+    <script defer src="/main.js"></script>
 </head>
-<body>
-
+<body class="relative pb-10 min-h-screen bg-slate-50">
     <%- include('../partials/header.ejs') %> 
-    <%- include('../partials/errorMessage.ejs') %> 
-    <%- body %> 
     
+    <div class="max-w-6xl px-8 py-14 mx-auto">
+
+        <% if (locals.errorMessage != null) { %>
+         
+        <div class="px-5 py-3 bg-red-100 rounded max-w-lg flex items-center mb-5 mx-auto">
+            <button class="bg-red-300 rounded-full h-5 w-5 flex left-2 top-2
+                items-center justify-center text-white text-xs font-bold mr-5">
+                <span>!</span>
+            </button>
+            
+            <span class="text-md font-semibold text-red-800">
+                <%- include('../partials/errorMessage.ejs') %> 
+            </span>     
+        </div>
+
+        <% } %>
+
+        <%- body %> 
+    </div>
+    
+    <footer class="absolute bottom-0 left-0 min-w-full">
+        <div class="max-w-6xl mx-auto text-center border-t border-slate-200 p-4">
+            <p class="text-gray-800">2022 Mybrary. Made with 
+                <a target="_blank" 
+                href="https://expressjs.com/" 
+                class="text-slate-500 hover:opacity-60">ExpressJS</a>, 
+                <a target="_blank" 
+                href="https://ejs.co/" 
+                class="text-slate-500 hover:opacity-60">EJS</a> &amp; 
+                <a target="_blank" 
+                href="https://tailwindcss.com/" 
+                class="text-slate-500 hover:opacity-60">Tailwind</a>. Stored on 
+                <a target="_blank" 
+                href="https://www.mongodb.com/" 
+                class="text-slate-500 hover:opacity-60">MongoDB</a>. Hosted on 
+                <a target="_blank" 
+                href=https://heroku.com/" 
+                class="text-slate-500 hover:opacity-60">ExpressJS</a></p>
+        </div>
+    </footer>
 </body>
 </html>
